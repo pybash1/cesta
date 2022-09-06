@@ -37,7 +37,7 @@ export default function DailyRoadmap() {
           weight={"bold"}
           css={{ textGradient: "45deg, $blue600 0%, $red600 80%" }}
         >
-          Today's Featured Roadmap
+          Today&apos;s Featured Roadmap
         </Text>
         <br />
         <Link href="/roadmap/id">

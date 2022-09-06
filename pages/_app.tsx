@@ -15,6 +15,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       <Head>
         <title>Cesta</title>
       </Head>
+      {/* @ts-ignore */}
       <IconlyProvider set='two-tone' stroke='bold' >
         <Component {...pageProps} />
       </IconlyProvider>
