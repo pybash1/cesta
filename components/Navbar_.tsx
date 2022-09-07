@@ -50,7 +50,7 @@ export default function Navbar_({ active }: Props) {
             <>
               <Spacer x={2} y={0} />
               <Button auto flat as={Link} href="">
-                <Search primaryColor="white" />
+                <Search set="bulk" primaryColor="white" />
               </Button>
             </>
           }

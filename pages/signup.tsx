@@ -30,7 +30,7 @@ export default function SignUp() {
           color="primary"
           size="lg"
           placeholder="Email"
-          contentLeft={<Message />}
+          contentLeft={<Message set="bulk" />}
         />
         <Spacer />
         <Input
@@ -40,7 +40,7 @@ export default function SignUp() {
           color="primary"
           size="lg"
           placeholder="Name"
-          contentLeft={<User />}
+          contentLeft={<User set="bulk" />}
         />
         <Spacer />
         <Input

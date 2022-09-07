@@ -30,7 +30,7 @@ export default function Login() {
           color="primary"
           size="lg"
           placeholder="Email"
-          contentLeft={<Message />}
+          contentLeft={<Message set="bulk" />}
         />
         <Spacer />
         <Row justify="space-between">
