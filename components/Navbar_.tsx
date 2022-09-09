@@ -49,7 +49,7 @@ export default function Navbar_({ active }: Props) {
           contentRight={
             <>
               <Spacer x={2} y={0} />
-              <Button auto flat as={Link} href="">
+              <Button auto light as={Link} href="">
                 <Search set="bulk" primaryColor="white" />
               </Button>
             </>
@@ -58,7 +58,7 @@ export default function Navbar_({ active }: Props) {
           labelPlaceholder="Search for roadmaps"
         />
         <Navbar.Item>
-          <Button auto flat rounded as={Link} href="/signup">
+          <Button auto flat as={Link} href="/signup">
             Get Started
           </Button>
         </Navbar.Item>
