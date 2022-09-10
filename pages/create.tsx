@@ -4,7 +4,7 @@ import CreateFlow from "../components/CreateFlow";
 import { useState } from "react";
 
 export default function Create() {
-  const [rfInstance, setRfInstance] = useState(null);
+  const [rfInstance, setRfInstance] = useState<any>(null);
   const [name, setName] = useState("");
   const [desc, setDesc] = useState("");
   const [flow, setFlow] = useState(null);
@@ -13,6 +13,7 @@ export default function Create() {
     console.log(name);
     console.log(desc);
     if (rfInstance) {
+      // @ts-ignore
       const flow = rfInstance.toObject();
       console.log(flow);
     }
@@ -50,7 +51,7 @@ export default function Create() {
         />
         <Spacer y={2} />
         <div style={{ width: "50vw", height: "50vh" }}>
-          <CreateFlow onInit={setRfInstance} />
+          <CreateFlow onInit={ref => setRfInstance(ref)} />
         </div>
         <Spacer y={2} />
         <Button onClick={onSubmit}>Create Roadmap</Button>
