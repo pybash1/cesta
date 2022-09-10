@@ -3,9 +3,10 @@ import { Search } from "react-iconly";
 
 interface Props {
   active: number;
+  loggedin: boolean;
 }
 
-export default function Navbar_({ active }: Props) {
+export default function Navbar_({ active, loggedin }: Props) {
   return (
     <Navbar isCompact isBordered>
       <Navbar.Brand>
@@ -35,13 +36,13 @@ export default function Navbar_({ active }: Props) {
         ) : (
           <Navbar.Link href="/resources">Resources</Navbar.Link>
         )}
-        {active == 3 ? (
+        {active == 3 && !loggedin ? (
           <Navbar.Link isActive href="/create">
             Create
           </Navbar.Link>
-        ) : (
+        ) : !loggedin ? (
           <Navbar.Link href="/create">Create</Navbar.Link>
-        )}
+        ) : null}
       </Navbar.Content>
       <Navbar.Content>
         <Input
@@ -58,8 +59,8 @@ export default function Navbar_({ active }: Props) {
           labelPlaceholder="Search for roadmaps"
         />
         <Navbar.Item>
-          <Button auto flat as={Link} href="/signup">
-            Get Started
+          <Button auto flat as={Link} href={loggedin ? "/create" : "/signup"}>
+            {loggedin ? "Create" : "Get Started"}
           </Button>
         </Navbar.Item>
       </Navbar.Content>

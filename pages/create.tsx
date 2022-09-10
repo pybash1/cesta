@@ -7,7 +7,6 @@ export default function Create() {
   const [rfInstance, setRfInstance] = useState<any>(null);
   const [name, setName] = useState("");
   const [desc, setDesc] = useState("");
-  const [flow, setFlow] = useState(null);
 
   const onSubmit = () => {
     console.log(name);
