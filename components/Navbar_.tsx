@@ -3,7 +3,7 @@ import { Search } from "react-iconly";
 
 interface Props {
   active: number;
-  loggedin: boolean;
+  loggedin?: boolean;
 }
 
 export default function Navbar_({ active, loggedin }: Props) {

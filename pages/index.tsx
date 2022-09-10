@@ -6,7 +6,7 @@ import GradientText from "../components/GradientText";
 const Home: NextPage = () => {
   return (
     <div className="bg-primary min-h-screen">
-      <Navbar loggedin={false} active={0} />
+      <Navbar active={0} />
       <Spacer y={10} />
       <Container display="flex" alignItems="center" direction="column">
         <GradientText />
