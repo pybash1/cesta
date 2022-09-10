@@ -1,9 +1,10 @@
-import ReactFlow, { Background, Edge, Node, ProOptions, ReactFlowProvider } from 'react-flow-renderer';
+import ReactFlow, { Background, Edge, Node, OnInit, ReactFlowProvider, useReactFlow } from 'react-flow-renderer';
 
 import useLayout from '../hooks/useLayout';
 
 import nodeTypes from './NodeTypes';
 import edgeTypes from './EdgeTypes';
+import { useState } from 'react';
 
 
 const defaultNodes: Node<any>[] = [
@@ -34,7 +35,7 @@ const fitViewOptions = {
   padding: 0.95,
 };
 
-function ReactFlowPro() {
+function ReactFlowPro({ onInit }: { onInit: OnInit }) {
   useLayout();
 
   return (
@@ -50,6 +51,7 @@ function ReactFlowPro() {
         fitViewOptions={fitViewOptions}
         zoomOnDoubleClick={false}
         minZoom={0.2}
+        onInit={onInit}
       >
         <Background />
       </ReactFlow>
@@ -57,10 +59,10 @@ function ReactFlowPro() {
   );
 }
 
-function ReactFlowWrapper() {
+function ReactFlowWrapper({ onInit }: { onInit: OnInit }) {
   return (
     <ReactFlowProvider>
-      <ReactFlowPro />
+      <ReactFlowPro onInit={onInit} />
     </ReactFlowProvider>
   );
 }
