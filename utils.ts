@@ -1,8 +1,8 @@
 import { Amplify, Auth } from "aws-amplify";
-import awsconfig from "./aws-exports";
+// import awsconfig from "./aws-exports";
 import { CognitoUser } from "@aws-amplify/auth";
 
-Amplify.configure(awsconfig)
+Amplify.configure(JSON.parse(process.env.NEXT_PUBLIC_AWS_CONFIG as string))
 
 export const uuid = (): string =>
   new Date().getTime().toString(36) + Math.random().toString(36).slice(2);
