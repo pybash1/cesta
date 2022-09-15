@@ -46,6 +46,13 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
+                "user": {
+                    "name": "user",
+                    "isArray": false,
+                    "type": "AWSEmail",
+                    "isRequired": false,
+                    "attributes": []
+                },
                 "createdAt": {
                     "name": "createdAt",
                     "isArray": false,
@@ -127,6 +134,13 @@ export const schema = {
                     "attributes": [],
                     "isArrayNullable": true
                 },
+                "user": {
+                    "name": "user",
+                    "isArray": false,
+                    "type": "AWSEmail",
+                    "isRequired": false,
+                    "attributes": []
+                },
                 "createdAt": {
                     "name": "createdAt",
                     "isArray": false,
@@ -172,5 +186,5 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "version": "e01c554066702540b36435812305a992"
+    "version": "2988435e243abb6ea0786e7fe22c0738"
 };

@@ -15,6 +15,7 @@ export declare class Roadmap {
   readonly flow: string;
   readonly resources?: (string | null)[] | null;
   readonly verified: boolean;
+  readonly user?: string | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
   constructor(init: ModelInit<Roadmap, RoadmapMetaData>);
@@ -27,6 +28,7 @@ export declare class Resource {
   readonly description: string;
   readonly link: string;
   readonly tags?: (string | null)[] | null;
+  readonly user?: string | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
   constructor(init: ModelInit<Resource, ResourceMetaData>);
