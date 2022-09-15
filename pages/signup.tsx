@@ -37,7 +37,10 @@ export default function SignUp() {
       toast.error("Email, name, or username is missing!");
       return;
     }
-    signUp(username, password, email, name).then((data) => console.log(data));
+    signUp(username, password, email, name).then((data) => console.log(data)).catch(e => {
+      toast.error(e.toString());
+      return;
+    });
     setVisible(true);
     return;
   };
@@ -50,14 +53,17 @@ export default function SignUp() {
     Auth.confirmSignUp(email, code).then(data => {
       signIn(email, password).then(data => {
         router.push("/");
-        toast.success("Signed in successfully!")
+        toast.success("Signed in successfully!");
       }).catch(e => {
         if (e.toString() == "UserNotConfirmedException: User is not confirmed.") {
-          toast.error("User is not confirmed!")
+          toast.error("User is not confirmed!");
+          return;
         } else if (e.toString() == "NotAuthorizedException: Incorrect username or password.") {
-          toast.error("Incorrect email or password!")
+          toast.error("Incorrect email or password!");
+          return;
         } else {
-          toast.error(e.toString())
+          toast.error(e.toString());
+          return;
         }
       });
       toast.success("Verified email successfully!");
@@ -65,8 +71,10 @@ export default function SignUp() {
       console.log(e.toString());
       if (e.toString() == "NotAuthorizedException: User cannot be confirmed. Current status is CONFIRMED") {
         toast.error("User is already verified!");
+        return;
       } else {
         toast.error("Incorrect verification code!")
+        return;
       }
     });
   }

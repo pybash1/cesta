@@ -31,9 +31,7 @@ export async function signUp(username: string, password: string, email: string, 
       "userSub": userSub
     }
   } catch (e: any) {
-    return {
-      msg: e.toString()
-    }
+    throw e;
   }
 }
 
