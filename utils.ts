@@ -1,5 +1,5 @@
 import { Amplify, Auth } from "aws-amplify";
-import awsconfig from "./pages/aws-exports";
+import awsconfig from "./aws-exports";
 import { CognitoUser } from "@aws-amplify/auth";
 
 Amplify.configure(awsconfig)
@@ -39,12 +39,10 @@ export async function signUp(username: string, password: string, email: string, 
 
 export async function signIn(username: string, password: string): Promise<CognitoUser | ErrorData> {
   try {
-    const { user } = await Auth.signIn(username, password);
-    return user;
+    const data = await Auth.signIn(username, password);
+    return data;
   } catch (e: any) {
-    return {
-      msg: e.toString()
-    }
+    throw e;
   }
 }
 
