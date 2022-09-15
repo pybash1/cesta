@@ -1,12 +1,21 @@
 import Navbar from "../components/Navbar_";
 import { Button, Container, Input, Spacer, Text, Textarea } from "@nextui-org/react";
 import CreateFlow from "../components/CreateFlow";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
+import { Auth } from "aws-amplify";
 
 export default function Create() {
   const [rfInstance, setRfInstance] = useState<any>(null);
   const [name, setName] = useState("");
   const [desc, setDesc] = useState("");
+  const router = useRouter();
+
+  useEffect(() => {
+    Auth.currentAuthenticatedUser().then(data => console.log(data)).catch(e => {
+      router.push("/login");
+    });
+  })
 
   const onSubmit = () => {
     console.log(name);
