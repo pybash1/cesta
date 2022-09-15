@@ -1,12 +1,28 @@
 import { Navbar, Text, Spacer, Button, Link, Input } from "@nextui-org/react";
+import { useEffect, useState } from "react";
 import { Search } from "react-iconly";
+import { Auth } from "aws-amplify";
+import { useRouter } from "next/router";
 
 interface Props {
   active: number;
-  loggedin?: boolean;
 }
 
-export default function Navbar_({ active, loggedin }: Props) {
+export default function Navbar_({ active }: Props) {
+  const [loggedin, setLoggedin] = useState(false);
+  const router = useRouter();
+
+  useEffect(() => {
+    Auth.currentAuthenticatedUser().then(data => setLoggedin(true)).catch(e => {
+      setLoggedin(false);
+    });
+  })
+
+  const handleSignOut = () => {
+    Auth.signOut().then(data => console.log(data));
+    router.push("/");
+  }
+
   return (
     <Navbar isCompact isBordered>
       <Navbar.Brand>
@@ -62,6 +78,17 @@ export default function Navbar_({ active, loggedin }: Props) {
           <Button auto flat as={Link} href={loggedin ? "/create" : "/signup"}>
             {loggedin ? "Create" : "Get Started"}
           </Button>
+        </Navbar.Item>
+        <Navbar.Item>
+          {loggedin ? (
+            <Button auto flat onClick={handleSignOut}>
+              Sign Out
+            </Button>
+          ) : (
+            <Button auto flat as={Link} href="/login">
+              Sign In
+            </Button>
+          )}
         </Navbar.Item>
       </Navbar.Content>
     </Navbar>
