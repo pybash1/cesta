@@ -214,7 +214,7 @@ export default function Login() {
           </Checkbox>
           <div>
             <Link href="/signup">
-              <Text size={14}>Don't have an account?</Text>
+              <Text size={14}>Don&apos;t have an account?</Text>
             </Link>
             <Link onClick={handleForgot}>
               <Text size={14}>Forgot password?</Text>
