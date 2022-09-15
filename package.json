@@ -17,6 +17,7 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-flow-renderer": "^10.3.16",
+    "react-hot-toast": "^2.4.0",
     "react-iconly": "^2.2.5"
   },
   "devDependencies": {
