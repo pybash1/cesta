@@ -4,9 +4,10 @@ import { schema } from './schema';
 
 
 
-const { Roadmap, Resource } = initSchema(schema);
+const { Roadmap, Resource, RoadmapResource } = initSchema(schema);
 
 export {
   Roadmap,
-  Resource
+  Resource,
+  RoadmapResource
 };

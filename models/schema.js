@@ -34,7 +34,9 @@ export const schema = {
                 "resources": {
                     "name": "resources",
                     "isArray": true,
-                    "type": "AWSJSON",
+                    "type": {
+                        "nonModel": "RoadmapResource"
+                    },
                     "isRequired": false,
                     "attributes": [],
                     "isArrayNullable": true
@@ -50,7 +52,7 @@ export const schema = {
                     "name": "user",
                     "isArray": false,
                     "type": "AWSEmail",
-                    "isRequired": false,
+                    "isRequired": true,
                     "attributes": []
                 },
                 "createdAt": {
@@ -138,7 +140,7 @@ export const schema = {
                     "name": "user",
                     "isArray": false,
                     "type": "AWSEmail",
-                    "isRequired": false,
+                    "isRequired": true,
                     "attributes": []
                 },
                 "createdAt": {
@@ -185,6 +187,40 @@ export const schema = {
         }
     },
     "enums": {},
-    "nonModels": {},
-    "version": "2988435e243abb6ea0786e7fe22c0738"
+    "nonModels": {
+        "RoadmapResource": {
+            "name": "RoadmapResource",
+            "fields": {
+                "name": {
+                    "name": "name",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "description": {
+                    "name": "description",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "link": {
+                    "name": "link",
+                    "isArray": false,
+                    "type": "AWSURL",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "user": {
+                    "name": "user",
+                    "isArray": false,
+                    "type": "AWSEmail",
+                    "isRequired": false,
+                    "attributes": []
+                }
+            }
+        }
+    },
+    "version": "95524801012f9da531647d0d80d048ff"
 };
