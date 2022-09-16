@@ -10,7 +10,7 @@ import {
   Input,
   Checkbox,
   Textarea,
-  Link
+  Link,
 } from "@nextui-org/react";
 import { Auth, DataStore } from "aws-amplify";
 import { useRouter } from "next/router";
@@ -22,7 +22,7 @@ import { Resource } from "../models";
 
 export default function Resources() {
   const [visible, setVisible] = useState(false);
-  const [resources, setResources] = useState<Resource[]>([])
+  const [resources, setResources] = useState<Resource[]>([]);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [link, setLink] = useState("");
@@ -34,9 +34,14 @@ export default function Resources() {
   const router = useRouter();
 
   useEffect(() => {
-    DataStore.query(Resource).then(data => setResources(data));
-    Auth.currentAuthenticatedUser().then(data => {setLoggedin(true); setUser(data.attributes.email)}).catch(e => setLoggedin(false));
-  }, [])
+    DataStore.query(Resource).then((data) => setResources(data));
+    Auth.currentAuthenticatedUser()
+      .then((data) => {
+        setLoggedin(true);
+        setUser(data.attributes.email);
+      })
+      .catch((e) => setLoggedin(false));
+  }, []);
 
   const addResource = () => {
     if (!name || !description || !link) {
@@ -45,35 +50,39 @@ export default function Resources() {
     }
 
     let tags: string[] = [];
-    if (free) tags.push("Free")
-    if (oss) tags.push("Open Source")
-    if (paid) tags.push("Paid")
+    if (free) tags.push("Free");
+    if (oss) tags.push("Open Source");
+    if (paid) tags.push("Paid");
 
-    Auth.currentAuthenticatedUser().then(data => {
-      try {
-        DataStore.save(
-          new Resource({
-            name,
-            description,
-            link,
-            tags,
-            user: data.attributes.email
-          })
-        ).then(data => setVisible(false)).catch(e => {
+    Auth.currentAuthenticatedUser()
+      .then((data) => {
+        try {
+          DataStore.save(
+            new Resource({
+              name,
+              description,
+              link,
+              tags,
+              user: data.attributes.email,
+            })
+          )
+            .then((data) => setVisible(false))
+            .catch((e) => {
+              toast.error("Link must be a valid URL!");
+            });
+        } catch (e) {
+          console.log(e);
           toast.error("Link must be a valid URL!");
-        });
-      } catch (e) {
-        console.log(e);
-        toast.error("Link must be a valid URL!");
-      }
-    }).catch(e => {
-      toast.error("You need to be logged in to add a resource!");
-      router.push("/login");
-      return;
-    })
+        }
+      })
+      .catch((e) => {
+        toast.error("You need to be logged in to add a resource!");
+        router.push("/login");
+        return;
+      });
 
-    DataStore.query(Resource).then(data => setResources(data));
-  }
+    DataStore.query(Resource).then((data) => setResources(data));
+  };
 
   const checkUser = () => {
     if (!loggedin) {
@@ -82,7 +91,7 @@ export default function Resources() {
       return;
     }
     setVisible(true);
-  }
+  };
 
   async function deleteResource(id: string) {
     const resource = await DataStore.query(Resource, id);
@@ -105,26 +114,26 @@ export default function Resources() {
         <Modal.Body>
           <Input
             value={name}
-            onChange={e => setName(e.target.value)}
+            onChange={(e) => setName(e.target.value)}
             clearable
             bordered
             fullWidth
             color="primary"
             size="lg"
             placeholder="Name"
-            />
+          />
           <Textarea
             value={description}
-            onChange={e => setDescription(e.target.value)}
+            onChange={(e) => setDescription(e.target.value)}
             bordered
             fullWidth
             color="primary"
             size="lg"
             placeholder="Description"
-            />
+          />
           <Input
             value={link}
-            onChange={e => setLink(e.target.value)}
+            onChange={(e) => setLink(e.target.value)}
             clearable
             bordered
             fullWidth
@@ -132,16 +141,14 @@ export default function Resources() {
             size="lg"
             placeholder="Link"
           />
-          <Text size={16}>
-            Tags
-          </Text>
-          <Checkbox onChange={e => setOss(e)}>
+          <Text size={16}>Tags</Text>
+          <Checkbox onChange={(e) => setOss(e)}>
             <Text size={14}>Open Source</Text>
           </Checkbox>
-          <Checkbox onChange={e => setFree(e)}>
+          <Checkbox onChange={(e) => setFree(e)}>
             <Text size={14}>Free</Text>
           </Checkbox>
-          <Checkbox onChange={e => setPaid(e)}>
+          <Checkbox onChange={(e) => setPaid(e)}>
             <Text size={14}>Paid</Text>
           </Checkbox>
           <Text size={14} color="warning">
@@ -179,14 +186,20 @@ export default function Resources() {
               <Card.Header>
                 <Row justify="space-between">
                   <Text b>{resource.name}</Text>
-                  {resource.user == user ? (<Button light auto onClick={() => deleteResource(resource.id)}><PaperFail set="bulk" primaryColor="red" /></Button>) : null}
+                  {resource.user == user ? (
+                    <Button
+                      light
+                      auto
+                      onClick={() => deleteResource(resource.id)}
+                    >
+                      <PaperFail set="bulk" primaryColor="red" />
+                    </Button>
+                  ) : null}
                 </Row>
               </Card.Header>
               <Card.Divider />
               <Card.Body css={{ py: "$10" }}>
-                <Text>
-                  {resource.description}
-                </Text>
+                <Text>{resource.description}</Text>
               </Card.Body>
               <Card.Divider />
               <Card.Footer>
@@ -194,23 +207,37 @@ export default function Resources() {
                   <Button size="sm" light>
                     {resource.tags?.join(", ")}
                   </Button>
-                  <Button size="sm" as={Link} href={resource.link} target="_blank">Visit</Button>
+                  <Button
+                    size="sm"
+                    as={Link}
+                    href={resource.link}
+                    target="_blank"
+                  >
+                    Visit
+                  </Button>
                 </Row>
               </Card.Footer>
             </Card>
           </Grid>
         ))}
-        <Grid xs={4} css={{ display: "flex", alignItems: "center" }}>
+        <Grid xs={4}>
           <Card isHoverable isPressable onPress={checkUser}>
             <Card.Body
               css={{
                 py: "$10",
                 background: "var(--nextui-colors-blue600)",
-                display: "flex",
-                alignItems: "center",
               }}
             >
-              <Plus set="bulk" size={84} />
+              <Plus
+                set="bulk"
+                size={84}
+                style={{
+                  position: "absolute",
+                  top: "50%",
+                  left: "50%",
+                  transform: "translate(-50%, -50%)",
+                }}
+              />
             </Card.Body>
           </Card>
         </Grid>
