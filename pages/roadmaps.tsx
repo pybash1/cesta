@@ -18,13 +18,13 @@ export default function Roadmaps() {
   useEffect(() => {
     (async () => {
       setRoadmaps(await DataStore.query(Roadmap));
-    })()
+    })();
     Auth.currentAuthenticatedUser()
-    .then((data) => {
-      setLoggedin(true);
-      setUser(data.attributes.email);
-    })
-    .catch((e) => setLoggedin(false));
+      .then((data) => {
+        setLoggedin(true);
+        setUser(data.attributes.email);
+      })
+      .catch((e) => setLoggedin(false));
   }, []);
 
   const checkUser = () => {
@@ -37,8 +37,8 @@ export default function Roadmaps() {
   };
 
   async function deleteRoadmap(id: string) {
-    DataStore.delete(await DataStore.query(Roadmap, id) as Roadmap);
-  };
+    DataStore.delete((await DataStore.query(Roadmap, id)) as Roadmap);
+  }
 
   return (
     <>
@@ -85,7 +85,7 @@ export default function Roadmaps() {
                   <Button
                     size="sm"
                     as={Link}
-                    href={"/roadmap/"+roadmap.id}
+                    href={"/roadmap/" + roadmap.id}
                     target="_blank"
                   >
                     Visit
@@ -101,11 +101,18 @@ export default function Roadmaps() {
               css={{
                 py: "$10",
                 background: "var(--nextui-colors-blue600)",
-                display: "flex",
-                alignItems: "center",
               }}
             >
-              <Plus set="bulk" size={84} />
+              <Plus
+                set="bulk"
+                size={84}
+                style={{
+                  position: "absolute",
+                  top: "50%",
+                  left: "50%",
+                  transform: "translate(-50%, -50%)",
+                }}
+              />
             </Card.Body>
           </Card>
         </Grid>
