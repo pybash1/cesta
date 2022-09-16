@@ -1,10 +1,9 @@
-import ReactFlow, { Background, Edge, Node, OnInit, ReactFlowProvider, useReactFlow } from 'react-flow-renderer';
+import ReactFlow, { Background, Edge, Node, OnInit, ReactFlowProvider } from 'react-flow-renderer';
 
 import useLayout from '../hooks/useLayout';
 
 import nodeTypes from './NodeTypes';
 import edgeTypes from './EdgeTypes';
-import { useState } from 'react';
 
 
 const defaultNodes: Node<any>[] = [
