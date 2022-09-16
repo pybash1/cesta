@@ -4,15 +4,20 @@ import CreateFlow from "../components/CreateFlow";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { Auth } from "aws-amplify";
+import { DataStore } from "@aws-amplify/datastore";
+import { Roadmap, RoadmapResource } from "../models";
 
 export default function Create() {
   const [rfInstance, setRfInstance] = useState<any>(null);
   const [name, setName] = useState("");
   const [desc, setDesc] = useState("");
+  const [user, setUser] = useState("");
   const router = useRouter();
 
   useEffect(() => {
-    Auth.currentAuthenticatedUser().then(data => console.log(data)).catch(e => {
+    Auth.currentAuthenticatedUser().then(data => {
+      setUser(data.attributes.email);
+    }).catch(e => {
       router.push("/login");
     });
   })
@@ -23,7 +28,20 @@ export default function Create() {
     if (rfInstance) {
       // @ts-ignore
       const flow = rfInstance.toObject();
-      console.log(flow);
+      const jsonFlow = JSON.stringify(flow);
+      DataStore.save(new Roadmap({
+        name,
+        description: desc,
+        flow: jsonFlow,
+        resources: [new RoadmapResource({
+          name: "test",
+          description: "lorem ipsum dolor sit amet",
+          link: "https://example.com",
+          user
+        })],
+        user,
+        verified: false
+      })).then(data => console.log(data))
     }
   }
 

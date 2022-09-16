@@ -3,6 +3,7 @@ import { Amplify, Auth } from "aws-amplify";
 import { CognitoUser } from "@aws-amplify/auth";
 
 Amplify.configure(JSON.parse(process.env.NEXT_PUBLIC_AWS_CONFIG as string))
+// Amplify.configure(awsconfig)
 
 export const uuid = (): string =>
   new Date().getTime().toString(36) + Math.random().toString(36).slice(2);
