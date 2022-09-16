@@ -1,45 +1,56 @@
-import { useState } from "react";
-import ReactFlow, { Controls } from "react-flow-renderer";
+import ReactFlow, { Background, Edge, Node, OnInit, ReactFlowProvider } from 'react-flow-renderer';
 
-interface Props {
-  initialNodes: {
-    id: string;
-    type?: string | undefined;
-    data: {
-      label: string | Element | JSX.Element;
-    };
-    position: {
-      x: number;
-      y: number;
-    };
-  }[];
-  initialEdges: {
-    id: string;
-    source: string;
-    target: string;
-  }[];
-}
+import useLayout from '../hooks/useLayout';
 
-function Flow({
-  initialNodes,
-  initialEdges,
-}: Props) {
-  const [nodes, setNodes] = useState(initialNodes);
-  const [edges, setEdges] = useState(initialEdges);
+import nodeTypes from './NodeTypes';
+import edgeTypes from './EdgeTypes';
+
+
+const defaultNodes: Node<any>[] = [
+  {
+    id: '1',
+    data: { label: 'Start Learning' },
+    position: { x: 0, y: 0 },
+    type: 'workflow',
+  },
+];
+
+const defaultEdges: Edge[] = [];
+
+const fitViewOptions = {
+  padding: 0.95,
+};
+
+function ReactFlowPro({ onInit, initialNodes, initialEdges }: { onInit: OnInit, initialNodes: Node[], initialEdges: Edge[] }) {
+  useLayout();
 
   return (
-    <ReactFlow
-      nodes={nodes}
-      edges={edges}
-      fitView
-      panOnScroll={false}
-      zoomOnScroll={false}
-      zoomOnPinch={false}
-      zoomOnDoubleClick={false}
-    >
-      <Controls />
-    </ReactFlow>
+    <>
+      <ReactFlow
+        defaultNodes={initialNodes}
+        defaultEdges={initialEdges}
+        fitView
+        nodesDraggable={false}
+        nodesConnectable={false}
+        nodeTypes={nodeTypes}
+        edgeTypes={edgeTypes}
+        fitViewOptions={fitViewOptions}
+        zoomOnDoubleClick={false}
+        minZoom={0.2}
+        onInit={onInit}
+      >
+        <Background />
+      </ReactFlow>
+    </>
   );
 }
 
-export default Flow;
+function ReactFlowWrapper({ onInit, initialNodes, initialEdges }: { onInit: OnInit, initialNodes: Node[], initialEdges: Edge[] }) {
+  return (
+    <ReactFlowProvider>
+      <ReactFlowPro onInit={onInit} initialNodes={initialNodes} initialEdges={initialEdges} />
+    </ReactFlowProvider>
+  );
+}
+
+export default ReactFlowWrapper;
