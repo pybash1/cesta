@@ -7,7 +7,7 @@ import { useRouter } from "next/router";
 import { Plus, PaperFail } from "react-iconly";
 import { DataStore } from "@aws-amplify/datastore";
 import { Auth } from "aws-amplify";
-import { Roadmap, RoadmapResource } from "../models";
+import { Roadmap } from "../models";
 
 export default function Roadmaps() {
   const [loggedin, setLoggedin] = useState(false);
@@ -95,84 +95,6 @@ export default function Roadmaps() {
             </Card>
           </Grid>
         ))}
-        <Grid xs={4}>
-          <Card isHoverable>
-            <Card.Header>
-              <Text b>Roadmap Name</Text>
-              <Badge color="primary" variant="flat">
-                Verified
-              </Badge>
-            </Card.Header>
-            <Card.Divider />
-            <Card.Body css={{ py: "$10" }}>
-              <Text>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi
-                est, facere iusto laboriosam iure hic aliquid, nihil, corrupti
-                sapiente fugit minus animi libero officiis eaque nesciunt ex!
-                Fugiat, praesentium veniam.
-              </Text>
-            </Card.Body>
-            <Card.Divider />
-            <Card.Footer>
-              <Row justify="flex-end">
-                <Button size="sm" light>
-                  Resources
-                </Button>
-                <Button size="sm">Explore</Button>
-              </Row>
-            </Card.Footer>
-          </Card>
-        </Grid>
-        <Grid xs={4}>
-          <Card isHoverable>
-            <Card.Header>
-              <Text b>Roadmap Name</Text>
-            </Card.Header>
-            <Card.Divider />
-            <Card.Body css={{ py: "$10" }}>
-              <Text>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi
-                est, facere iusto laboriosam iure hic aliquid, nihil, corrupti
-                sapiente fugit minus animi libero officiis eaque nesciunt ex!
-                Fugiat, praesentium veniam.
-              </Text>
-            </Card.Body>
-            <Card.Divider />
-            <Card.Footer>
-              <Row justify="flex-end">
-                <Button size="sm" light>
-                  Resources
-                </Button>
-                <Button size="sm">Explore</Button>
-              </Row>
-            </Card.Footer>
-          </Card>
-        </Grid>
-        <Grid xs={4}>
-          <Card isHoverable>
-            <Card.Header>
-              <Text b>Roadmap Name</Text>
-            </Card.Header>
-            <Card.Divider />
-            <Card.Body css={{ py: "$10" }}>
-              <Text>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi
-                est, facere iusto laboriosam iure hic aliquid, nihil, corrupti
-                sapiente fugit minus animi libero officiis eaque nesciunt ex!
-                Fugiat, praesentium veniam.
-              </Text>
-            </Card.Body>
-            <Card.Divider />
-            <Card.Footer>
-              <Row justify="flex-end">
-                <Button size="sm" light>
-                  Resources
-                </Button>
-                <Button size="sm">Explore</Button>
-              </Row>
-            </Card.Footer>
-          </Card>
-        </Grid>
         <Grid xs={4}>
           <Card isHoverable isPressable onPress={checkUser}>
             <Card.Body
