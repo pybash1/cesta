@@ -226,6 +226,7 @@ export default function Resources() {
               css={{
                 py: "$10",
                 background: "var(--nextui-colors-blue600)",
+                minHeight: "200px"
               }}
             >
               <Plus
