@@ -137,7 +137,7 @@ export default function Roadmaps() {
           </Row>
         </Modal.Body>
       </Modal>
-      <DailyRoadmap />
+      <DailyRoadmap openRoadmap={openRoadmap} />
       <Text h1 size={60} css={{ paddingLeft: "$20" }}>
         Explore Roadmaps
       </Text>

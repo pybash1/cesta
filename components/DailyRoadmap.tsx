@@ -1,15 +1,18 @@
 import { DataStore } from "@aws-amplify/datastore";
-import { Grid, Text, Link } from "@nextui-org/react";
+import { Grid, Text, Button } from "@nextui-org/react";
 import { useEffect, useState } from "react";
 import { Roadmap } from "../models";
 import Flow from "./Flow";
 
-export default function DailyRoadmap() {
+export default function DailyRoadmap({ openRoadmap }: { openRoadmap: (idx: number) => void }) {
+  const [idx, setIdx] = useState<number | null>(null);
   const [roadmap, setRoadmap] = useState<Roadmap | null>(null);
 
   useEffect(() => {
     DataStore.query(Roadmap).then(data => {
-      setRoadmap(data[Math.floor(Math.random()*data.length)])
+      let idx = Math.floor(Math.random()*data.length);
+      setIdx(idx);
+      setRoadmap(data[idx]);
     });
   }, [])
 
@@ -26,11 +29,11 @@ export default function DailyRoadmap() {
               Today&apos;s Featured Roadmap
             </Text>
             <br />
-            <Link href="/roadmap/id">
+            <Button auto light onClick={() => openRoadmap(idx as number)}>
               <Text color="primary" h2 size={40} weight={"bold"}>
                 {roadmap?.name}
               </Text>
-            </Link>
+            </Button>
             <br />
             <Text>
               {roadmap?.description}
