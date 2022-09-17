@@ -1,18 +1,37 @@
 import DailyRoadmap from "../components/DailyRoadmap";
 import Navbar from "../components/Navbar_";
-import { Card, Grid, Text, Row, Button, Badge, Link } from "@nextui-org/react";
+import {
+  Card,
+  Grid,
+  Text,
+  Row,
+  Button,
+  Badge,
+  Modal,
+  Spacer,
+  Table,
+  Container,
+  Link,
+} from "@nextui-org/react";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useRouter } from "next/router";
 import { Plus, PaperFail } from "react-iconly";
 import { DataStore } from "@aws-amplify/datastore";
 import { Auth } from "aws-amplify";
-import { Roadmap } from "../models";
+import { Roadmap, RoadmapResource } from "../models";
+import Flow from "../components/Flow";
 
 export default function Roadmaps() {
   const [loggedin, setLoggedin] = useState(false);
   const [roadmaps, setRoadmaps] = useState<Roadmap[]>([]);
   const [user, setUser] = useState("");
+  const [visible, setVisible] = useState(false);
+  const [modalTitle, setModalTitle] = useState("");
+  const [modalDescription, setModalDescription] = useState("");
+  const [modalNodes, setModalNodes] = useState([]);
+  const [modalEdges, setModalEdges] = useState([]);
+  const [modalResources, setModalResources] = useState<RoadmapResource[]>([]);
   const router = useRouter();
 
   useEffect(() => {
@@ -40,9 +59,84 @@ export default function Roadmaps() {
     DataStore.delete((await DataStore.query(Roadmap, id)) as Roadmap);
   }
 
+  const openRoadmap = (idx: number) => {
+    setModalTitle(roadmaps[idx].name);
+    setModalDescription(roadmaps[idx].description);
+    // @ts-ignore
+    setModalNodes(roadmaps[idx].flow.nodes || []);
+    // @ts-ignore
+    setModalEdges(roadmaps[idx].flow.edges || []);
+    setModalResources(roadmaps[idx]?.resources as RoadmapResource[]);
+    setVisible(true);
+  };
+
   return (
     <>
       <Navbar active={1} />
+      <Modal
+        open={visible}
+        blur
+        closeButton
+        scroll
+        width="65%"
+        onClose={() => setVisible(false)}
+      >
+        <Modal.Header>
+          <Text id="modal-title" size={18}>
+            {modalTitle}
+          </Text>
+        </Modal.Header>
+        <Modal.Body css={{ padding: "$10" }}>
+          <Text
+            id="modal-description"
+            css={{ paddingLeft: "$10", paddingRight: "$10" }}
+          >
+            {modalDescription}
+          </Text>
+          <Row>
+
+            <Container>
+              <Text
+                b
+                size={20}
+                id="modal-description"
+              >
+                Roadmap
+              </Text>
+              <div style={{ width: "500px", height: "700px" }}>
+                <Flow
+                  onInit={() => {}}
+                  initialNodes={modalNodes}
+                  initialEdges={modalEdges}
+                />
+              </div>
+            </Container>
+            <Container>
+              <Text
+                b
+                size={20}
+                id="modal-description"
+              >
+                Resources
+              </Text>
+              <Table>
+                <Table.Header>
+                  <Table.Column>Name</Table.Column>
+                  <Table.Column>Description</Table.Column>
+                </Table.Header>
+                <Table.Body>
+                  {modalResources.map((resource, idx) => (
+                    <Table.Row key={idx}>
+                      <Table.Cell><Link href={resource?.link}>{resource?.name}</Link></Table.Cell>
+                      <Table.Cell>{resource?.description}</Table.Cell>
+                    </Table.Row>
+                  ))}
+                </Table.Body>
+              </Table>
+            </Container>
+          </Row>
+        </Modal.Body>
+      </Modal>
       <DailyRoadmap />
       <Text h1 size={60} css={{ paddingLeft: "$20" }}>
         Explore Roadmaps
@@ -82,13 +176,8 @@ export default function Roadmaps() {
                   <Button size="sm" light>
                     {roadmap.resources?.length} resources
                   </Button>
-                  <Button
-                    size="sm"
-                    as={Link}
-                    href={"/roadmap/" + roadmap.id}
-                    target="_blank"
-                  >
-                    Visit
+                  <Button size="sm" onClick={() => openRoadmap(idx)}>
+                    Explore
                   </Button>
                 </Row>
               </Card.Footer>
@@ -101,7 +190,7 @@ export default function Roadmaps() {
               css={{
                 py: "$10",
                 background: "var(--nextui-colors-blue600)",
-                minHeight: "200px"
+                minHeight: "200px",
               }}
             >
               <Plus
