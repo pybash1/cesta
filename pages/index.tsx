@@ -9,7 +9,6 @@ const Home: NextPage = () => {
     <div className="bg-primary min-h-screen">
       <Head>
         <title>Home - Cesta</title>
-        <meta property="og:title" content="Cesta" />
       </Head>
       <Navbar active={0} />
       <Spacer y={10} />

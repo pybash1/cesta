@@ -80,7 +80,6 @@ export default function Roadmaps() {
     <>
       <Head>
         <title>Roadmaps - Cesta</title>
-        <meta property="og:title" content="Roadmaps | Cesta" />
       </Head>
       <Navbar active={1} />
       <Modal

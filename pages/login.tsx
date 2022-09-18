@@ -159,7 +159,6 @@ export default function Login() {
     <>
       <Head>
         <title>Login - Cesta</title>
-        <meta property="og:title" content="Login | Cesta" />
       </Head>
       <Navbar active={100} />
       <Modal open={visible} onClose={() => setVisible(false)}>

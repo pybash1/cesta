@@ -14,7 +14,6 @@ export default function NotFound() {
     >
       <Head>
         <title>Not Found - Cesta</title>
-        <meta property="og:title" content="Not Found | Cesta" />
       </Head>
       <Text
         h1

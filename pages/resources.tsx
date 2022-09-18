@@ -104,7 +104,6 @@ export default function Resources() {
     <>
       <Head>
         <title>Resources - Cesta</title>
-        <meta property="og:title" content="Resources | Cesta" />
       </Head>
       <Navbar active={2} />
       <Modal open={visible} closeButton onClose={() => setVisible(false)}>

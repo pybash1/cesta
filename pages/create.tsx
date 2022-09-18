@@ -94,7 +94,6 @@ export default function Create() {
     <>
       <Head>
         <title>Create - Cesta</title>
-        <meta property="og:title" content="Create | Cesta" />
       </Head>
       <Navbar active={3} />
       <Container

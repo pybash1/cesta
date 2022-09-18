@@ -101,7 +101,6 @@ export default function SignUp() {
     <>
       <Head>
         <title>Sign Up - Cesta</title>
-        <meta property="og:title" content="Sign Up | Cesta" />
       </Head>
       <Navbar active={100} />
       <Modal open={visible} blur preventClose>
