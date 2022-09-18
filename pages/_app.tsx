@@ -23,7 +23,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           content="One stop to learn, share and find roadmaps, and resources about anything."
         />
         <meta property="og:url" content="https://cesta-project.vercel.app" />
-        <meta property="og:image" content="/favicon.png" />
+        <meta property="og:image" content="https://cesta-project.vercel.app/banner.png" />
       </Head>
       {/* @ts-ignore */}
       <IconlyProvider set='two-tone' stroke='bold' >
