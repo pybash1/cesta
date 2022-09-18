@@ -8,7 +8,6 @@ import {
   Button,
   Badge,
   Modal,
-  Spacer,
   Table,
   Container,
   Link,
@@ -21,18 +20,23 @@ import { DataStore } from "@aws-amplify/datastore";
 import { Auth } from "aws-amplify";
 import { Roadmap, RoadmapResource } from "../models";
 import Flow from "../components/Flow";
+import { CopyToClipboard } from "react-copy-to-clipboard";
 
 export default function Roadmaps() {
   const [loggedin, setLoggedin] = useState(false);
   const [roadmaps, setRoadmaps] = useState<Roadmap[]>([]);
   const [user, setUser] = useState("");
   const [visible, setVisible] = useState(false);
+  const [shareVisible, setShareVisible] = useState(false);
   const [modalTitle, setModalTitle] = useState("");
   const [modalDescription, setModalDescription] = useState("");
   const [modalNodes, setModalNodes] = useState([]);
   const [modalEdges, setModalEdges] = useState([]);
   const [modalResources, setModalResources] = useState<RoadmapResource[]>([]);
   const router = useRouter();
+
+  const shareText1 = "I just found the perfect roadmap for learning ";
+  const shareText2 = " and you can too! Find the perfect roadmap for learning your favorite skill here: ";
 
   useEffect(() => {
     (async () => {
@@ -94,13 +98,8 @@ export default function Roadmaps() {
             {modalDescription}
           </Text>
           <Row>
-
             <Container>
-              <Text
-                b
-                size={20}
-                id="modal-description"
-              >
+              <Text b size={20} id="modal-description">
                 Roadmap
               </Text>
               <div style={{ width: "500px", height: "700px" }}>
@@ -112,11 +111,7 @@ export default function Roadmaps() {
               </div>
             </Container>
             <Container>
-              <Text
-                b
-                size={20}
-                id="modal-description"
-              >
+              <Text b size={20} id="modal-description">
                 Resources
               </Text>
               <Table>
@@ -127,7 +122,9 @@ export default function Roadmaps() {
                 <Table.Body>
                   {modalResources.map((resource, idx) => (
                     <Table.Row key={idx}>
-                      <Table.Cell><Link href={resource?.link}>{resource?.name}</Link></Table.Cell>
+                      <Table.Cell>
+                        <Link href={resource?.link}>{resource?.name}</Link>
+                      </Table.Cell>
                       <Table.Cell>{resource?.description}</Table.Cell>
                     </Table.Row>
                   ))}
@@ -136,6 +133,27 @@ export default function Roadmaps() {
             </Container>
           </Row>
         </Modal.Body>
+        <Modal.Footer>
+          <Modal open={shareVisible} blur closeButton onClose={() => setShareVisible(false)}>
+            <Modal.Header>
+              <Text b size={20}>Share</Text>
+            </Modal.Header>
+            <Modal.Body css={{ paddingLeft: "$20", paddingRight: "$20", paddingBottom: "$10" }}>
+              <Button as={Link} href={`https://twitter.com/intent/tweet?text=${shareText1}${modalTitle}${shareText2}&url=https://cesta-project.vercel.app`} target="_blank">Tweet</Button>
+              <Button as={Link} href={`https://www.linkedin.com/sharing/share-offsite/?url=https://cesta-project.vercel.app/`} target="_blank">LinkedIn</Button>
+              <Button as={Link} href={`https://web.whatsapp.com/send?text=${shareText1}${modalTitle}${shareText2}%20https://cesta-project.vercel.app/`} target="_blank">WhatsApp</Button>
+              <Button as={Link} href={`https://t.me/share/url?url=https://cesta-project.vercel.app/&text=${shareText1}${modalTitle}${shareText2}%20https://cesta-project.vercel.app/`} target="_blank">Telegram</Button>
+              <Button as={Link} href={`https://discord.com/channels/@me`} target="_blank">Discord</Button>
+              <Button as={Link} href={`mailto:?subject=Find the perfect roadmap!&body=${shareText1}${modalTitle}${shareText2}%20https://cesta-project.vercel.app/`} target="_blank">Email</Button>
+              <CopyToClipboard text={`${shareText1}${modalTitle}${shareText2} https://cesta-project.vercel.app/`} onCopy={() => toast.success("Copied to clipboard!")}>
+                <Button as={Link}>Copy as Text</Button>
+              </CopyToClipboard>
+            </Modal.Body>
+          </Modal>
+          <Button auto onClick={() => setShareVisible(true)}>
+            Share
+          </Button>
+        </Modal.Footer>
       </Modal>
       <DailyRoadmap openRoadmap={openRoadmap} />
       <Text h1 size={60} css={{ paddingLeft: "$20" }}>
