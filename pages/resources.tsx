@@ -19,6 +19,7 @@ import toast from "react-hot-toast";
 import { Plus, PaperFail } from "react-iconly";
 import Navbar from "../components/Navbar_";
 import { Resource } from "../models";
+import Head from "next/head";
 
 export default function Resources() {
   const [visible, setVisible] = useState(false);
@@ -101,6 +102,10 @@ export default function Resources() {
 
   return (
     <>
+      <Head>
+        <title>Resources - Cesta</title>
+        <meta property="og:title" content="Resources | Cesta" />
+      </Head>
       <Navbar active={2} />
       <Modal open={visible} closeButton onClose={() => setVisible(false)}>
         <Modal.Header>
@@ -226,7 +231,7 @@ export default function Resources() {
               css={{
                 py: "$10",
                 background: "var(--nextui-colors-blue600)",
-                minHeight: "200px"
+                minHeight: "200px",
               }}
             >
               <Plus

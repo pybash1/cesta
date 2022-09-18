@@ -8,7 +8,7 @@ import {
   Container,
   Spacer,
   Modal,
-  Link
+  Link,
 } from "@nextui-org/react";
 import { Message, User, Password } from "react-iconly";
 import { signIn, signUp } from "../utils";
@@ -16,6 +16,7 @@ import { useEffect, useState } from "react";
 import { Auth } from "aws-amplify";
 import { useRouter } from "next/router";
 import toast from "react-hot-toast";
+import Head from "next/head";
 
 export default function SignUp() {
   const [email, setEmail] = useState("");
@@ -27,20 +28,24 @@ export default function SignUp() {
   const router = useRouter();
 
   useEffect(() => {
-    Auth.currentAuthenticatedUser().then(data => router.push("/")).catch(e => {
-      console.log(e)
-    });
-  })
+    Auth.currentAuthenticatedUser()
+      .then((data) => router.push("/"))
+      .catch((e) => {
+        console.log(e);
+      });
+  });
 
   const handleSignUp = () => {
     if (!email || !name || !username) {
       toast.error("Email, name, or username is missing!");
       return;
     }
-    signUp(username, password, email, name).then((data) => console.log(data)).catch(e => {
-      toast.error(e.toString());
-      return;
-    });
+    signUp(username, password, email, name)
+      .then((data) => console.log(data))
+      .catch((e) => {
+        toast.error(e.toString());
+        return;
+      });
     setVisible(true);
     return;
   };
@@ -50,37 +55,54 @@ export default function SignUp() {
       toast.error("Code cannot be empty!");
       return;
     }
-    Auth.confirmSignUp(email, code).then(data => {
-      signIn(email, password).then(data => {
-        router.push("/");
-        toast.success("Signed in successfully!");
-      }).catch(e => {
-        if (e.toString() == "UserNotConfirmedException: User is not confirmed.") {
-          toast.error("User is not confirmed!");
-          return;
-        } else if (e.toString() == "NotAuthorizedException: Incorrect username or password.") {
-          toast.error("Incorrect email or password!");
+    Auth.confirmSignUp(email, code)
+      .then((data) => {
+        signIn(email, password)
+          .then((data) => {
+            router.push("/");
+            toast.success("Signed in successfully!");
+          })
+          .catch((e) => {
+            if (
+              e.toString() ==
+              "UserNotConfirmedException: User is not confirmed."
+            ) {
+              toast.error("User is not confirmed!");
+              return;
+            } else if (
+              e.toString() ==
+              "NotAuthorizedException: Incorrect username or password."
+            ) {
+              toast.error("Incorrect email or password!");
+              return;
+            } else {
+              toast.error(e.toString());
+              return;
+            }
+          });
+        toast.success("Verified email successfully!");
+      })
+      .catch((e) => {
+        console.log(e.toString());
+        if (
+          e.toString() ==
+          "NotAuthorizedException: User cannot be confirmed. Current status is CONFIRMED"
+        ) {
+          toast.error("User is already verified!");
           return;
         } else {
-          toast.error(e.toString());
+          toast.error("Incorrect verification code!");
           return;
         }
       });
-      toast.success("Verified email successfully!");
-    }).catch(e => {
-      console.log(e.toString());
-      if (e.toString() == "NotAuthorizedException: User cannot be confirmed. Current status is CONFIRMED") {
-        toast.error("User is already verified!");
-        return;
-      } else {
-        toast.error("Incorrect verification code!")
-        return;
-      }
-    });
-  }
+  };
 
   return (
     <>
+      <Head>
+        <title>Sign Up - Cesta</title>
+        <meta property="og:title" content="Sign Up | Cesta" />
+      </Head>
       <Navbar active={100} />
       <Modal open={visible} blur preventClose>
         <Modal.Header>
@@ -91,7 +113,7 @@ export default function SignUp() {
         <Modal.Body>
           <Input
             value={code}
-            onChange={e => setCode(e.target.value)}
+            onChange={(e) => setCode(e.target.value)}
             clearable
             bordered
             fullWidth

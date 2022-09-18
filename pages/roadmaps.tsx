@@ -21,6 +21,7 @@ import { Auth } from "aws-amplify";
 import { Roadmap, RoadmapResource } from "../models";
 import Flow from "../components/Flow";
 import { CopyToClipboard } from "react-copy-to-clipboard";
+import Head from "next/head";
 
 export default function Roadmaps() {
   const [loggedin, setLoggedin] = useState(false);
@@ -36,7 +37,8 @@ export default function Roadmaps() {
   const router = useRouter();
 
   const shareText1 = "I just found the perfect roadmap for learning ";
-  const shareText2 = " and you can too! Find the perfect roadmap for learning your favorite skill here: ";
+  const shareText2 =
+    " and you can too! Find the perfect roadmap for learning your favorite skill here: ";
 
   useEffect(() => {
     (async () => {
@@ -76,6 +78,10 @@ export default function Roadmaps() {
 
   return (
     <>
+      <Head>
+        <title>Roadmaps - Cesta</title>
+        <meta property="og:title" content="Roadmaps | Cesta" />
+      </Head>
       <Navbar active={1} />
       <Modal
         open={visible}
@@ -134,18 +140,70 @@ export default function Roadmaps() {
           </Row>
         </Modal.Body>
         <Modal.Footer>
-          <Modal open={shareVisible} blur closeButton onClose={() => setShareVisible(false)}>
+          <Modal
+            open={shareVisible}
+            blur
+            closeButton
+            onClose={() => setShareVisible(false)}
+          >
             <Modal.Header>
-              <Text b size={20}>Share</Text>
+              <Text b size={20}>
+                Share
+              </Text>
             </Modal.Header>
-            <Modal.Body css={{ paddingLeft: "$20", paddingRight: "$20", paddingBottom: "$10" }}>
-              <Button as={Link} href={`https://twitter.com/intent/tweet?text=${shareText1}${modalTitle}${shareText2}&url=https://cesta-project.vercel.app`} target="_blank">Tweet</Button>
-              <Button as={Link} href={`https://www.linkedin.com/sharing/share-offsite/?url=https://cesta-project.vercel.app/`} target="_blank">LinkedIn</Button>
-              <Button as={Link} href={`https://web.whatsapp.com/send?text=${shareText1}${modalTitle}${shareText2}%20https://cesta-project.vercel.app/`} target="_blank">WhatsApp</Button>
-              <Button as={Link} href={`https://t.me/share/url?url=https://cesta-project.vercel.app/&text=${shareText1}${modalTitle}${shareText2}%20https://cesta-project.vercel.app/`} target="_blank">Telegram</Button>
-              <Button as={Link} href={`https://discord.com/channels/@me`} target="_blank">Discord</Button>
-              <Button as={Link} href={`mailto:?subject=Find the perfect roadmap!&body=${shareText1}${modalTitle}${shareText2}%20https://cesta-project.vercel.app/`} target="_blank">Email</Button>
-              <CopyToClipboard text={`${shareText1}${modalTitle}${shareText2} https://cesta-project.vercel.app/`} onCopy={() => toast.success("Copied to clipboard!")}>
+            <Modal.Body
+              css={{
+                paddingLeft: "$20",
+                paddingRight: "$20",
+                paddingBottom: "$10",
+              }}
+            >
+              <Button
+                as={Link}
+                href={`https://twitter.com/intent/tweet?text=${shareText1}${modalTitle}${shareText2}&url=https://cesta-project.vercel.app`}
+                target="_blank"
+              >
+                Tweet
+              </Button>
+              <Button
+                as={Link}
+                href={`https://www.linkedin.com/sharing/share-offsite/?url=https://cesta-project.vercel.app/`}
+                target="_blank"
+              >
+                LinkedIn
+              </Button>
+              <Button
+                as={Link}
+                href={`https://web.whatsapp.com/send?text=${shareText1}${modalTitle}${shareText2}%20https://cesta-project.vercel.app/`}
+                target="_blank"
+              >
+                WhatsApp
+              </Button>
+              <Button
+                as={Link}
+                href={`https://t.me/share/url?url=https://cesta-project.vercel.app/&text=${shareText1}${modalTitle}${shareText2}%20https://cesta-project.vercel.app/`}
+                target="_blank"
+              >
+                Telegram
+              </Button>
+              <Button
+                as={Link}
+                href={`https://discord.com/channels/@me`}
+                target="_blank"
+              >
+                Discord
+              </Button>
+              <Button
+                as={Link}
+                href={`mailto:?subject=Find the perfect roadmap!&body=${shareText1}${modalTitle}${shareText2}%20https://cesta-project.vercel.app/`}
+                target="_blank"
+              >
+                Email
+              </Button>
+              <CopyToClipboard
+                text={`${shareText1}${modalTitle}${shareText2} https://cesta-project.vercel.app/`}
+                onCopy={() => toast.success("Copied to clipboard!")}
+              >
                 <Button as={Link}>Copy as Text</Button>
               </CopyToClipboard>
             </Modal.Body>

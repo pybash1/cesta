@@ -15,6 +15,7 @@ import { Auth } from "aws-amplify";
 import { DataStore } from "@aws-amplify/datastore";
 import { Roadmap, RoadmapResource } from "../models";
 import toast from "react-hot-toast";
+import Head from "next/head";
 
 export default function Create() {
   const [rfInstance, setRfInstance] = useState<any>(null);
@@ -66,12 +67,16 @@ export default function Create() {
     }
 
     try {
-      setResources(resources.concat(new RoadmapResource({
-        name: resourceName,
-        description: resourceDesc,
-        link: resourceLink,
-        user
-      })));
+      setResources(
+        resources.concat(
+          new RoadmapResource({
+            name: resourceName,
+            description: resourceDesc,
+            link: resourceLink,
+            user,
+          })
+        )
+      );
       setResourceName("");
       setResourceDesc("");
       setResourceLink("");
@@ -79,14 +84,18 @@ export default function Create() {
       toast.error("Link must be a valid URL!");
       return;
     }
-  }
+  };
 
   const removeResource = (idx: number) => {
-    setResources(resources.splice(idx-1, 1));
-  }
+    setResources(resources.splice(idx - 1, 1));
+  };
 
   return (
     <>
+      <Head>
+        <title>Create - Cesta</title>
+        <meta property="og:title" content="Create | Cesta" />
+      </Head>
       <Navbar active={3} />
       <Container
         fluid
@@ -120,7 +129,9 @@ export default function Create() {
           <CreateFlow onInit={(ref) => setRfInstance(ref)} />
         </div>
         <Spacer y={2} />
-        <Text b size={20}>Resources</Text>
+        <Text b size={20}>
+          Resources
+        </Text>
         <Spacer />
         <Table>
           <Table.Header>
@@ -135,7 +146,11 @@ export default function Create() {
                 <Table.Cell>{resource.name}</Table.Cell>
                 <Table.Cell>{resource.description}</Table.Cell>
                 <Table.Cell>{resource.link}</Table.Cell>
-                <Table.Cell><Button auto onClick={() => removeResource(idx)}>Remove</Button></Table.Cell>
+                <Table.Cell>
+                  <Button auto onClick={() => removeResource(idx)}>
+                    Remove
+                  </Button>
+                </Table.Cell>
               </Table.Row>
             ))}
           </Table.Body>
@@ -150,7 +165,7 @@ export default function Create() {
             width="$80"
             clearable
             bordered
-            />
+          />
           <Spacer />
           <Textarea
             value={resourceDesc}

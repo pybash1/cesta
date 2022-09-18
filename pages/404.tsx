@@ -1,4 +1,5 @@
-import { Container, Text, Button, Spacer, Link } from "@nextui-org/react";
+import { Text, Button, Spacer, Link } from "@nextui-org/react";
+import Head from "next/head";
 
 export default function NotFound() {
   return (
@@ -11,6 +12,10 @@ export default function NotFound() {
         backgroundSize: "cover",
       }}
     >
+      <Head>
+        <title>Not Found - Cesta</title>
+        <meta property="og:title" content="Not Found | Cesta" />
+      </Head>
       <Text
         h1
         size={96}
