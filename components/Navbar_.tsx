@@ -61,19 +61,6 @@ export default function Navbar_({ active }: Props) {
         ) : null}
       </Navbar.Content>
       <Navbar.Content>
-        <Input
-          contentRightStyling={false}
-          contentRight={
-            <>
-              <Spacer x={2} y={0} />
-              <Button auto light as={Link} href="">
-                <Search set="bulk" primaryColor="white" />
-              </Button>
-            </>
-          }
-          clearable
-          labelPlaceholder="Search for roadmaps"
-        />
         <Navbar.Item>
           <Button auto flat as={Link} href={loggedin ? "/create" : "/signup"}>
             {loggedin ? "Create" : "Get Started"}
