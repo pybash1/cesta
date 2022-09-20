@@ -6,17 +6,6 @@ import nodeTypes from './NodeTypes';
 import edgeTypes from './EdgeTypes';
 
 
-const defaultNodes: Node<any>[] = [
-  {
-    id: '1',
-    data: { label: 'Start Learning' },
-    position: { x: 0, y: 0 },
-    type: 'workflow',
-  },
-];
-
-const defaultEdges: Edge[] = [];
-
 const fitViewOptions = {
   padding: 0.95,
 };
