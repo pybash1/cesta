@@ -1,34 +1,66 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<p align="center">
+    <img src="https://cesta-project.vercel.app/logo.png" alt="logo" />
+</p>
 
-## Getting Started
 
-First, run the development server:
+# Cesta
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+Cesta is an all in one platform, to find, share, discover, and learn new things through roadmaps, and resources.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+> **Note**: This project was made for the [AWS Amplify](https://aws.amazon.com/amplify/) x [Hashnode](https://hashnode.com) hackathon.
+## Badges
+[![MIT License](https://img.shields.io/apm/l/atomic-design-ui.svg?)](https://github.com/tterb/atomic-design-ui/blob/master/LICENSEs)
+## Demo
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+Insert gif or link to demo
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+## Features
 
-## Learn More
+- 🚀Open Source
+- 🌐Easy to use
+- 🕶️Dark mode
+- 💻Cross platform
+- Learn new things
+- Discover new resources
 
-To learn more about Next.js, take a look at the following resources:
+## FAQ
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+#### How to delete a node?
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Right click the node to delete it.
 
-## Deploy on Vercel
+#### How to search for roadmaps and resources?
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Press `Shift+K` to search for opening the search palette.
+## Feedback
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+If you have any feedback, you can DM me on [Twitter](https://twitter.com/py_bash1), or Discord(@pybash#3122).
+
+## Tech Stack
+
+**Client:** NextJS, NextUI
+
+**Server:** [AWS Amplify](https://aws.amazon.com/amplify)
+## Contributing
+
+Contributions are always welcome!
+
+See [CONTRIBUTING.md](./CONTRIBUTING.md) for ways to get started.
+
+Please adhere to this project's [code of conduct](./CODE_OF_CONDUCT.md).
+
+## Environment Variables
+
+To run this project, you will need to add the following environment variables to your .env file
+
+`NEXT_PUBLIC_AWS_CONFIG` - a string containing the AWS config
+## Authors
+
+- [@pybash1](https://www.github.com/pybash1)
+
+
+## License
+
+[MIT](https://choosealicense.com/licenses/mit/)
+
