@@ -1,9 +1,10 @@
-import React, { useCallback, useRef } from 'react';
+import { useCallback, useRef } from 'react';
 import { Handle, Position, NodeProps } from 'react-flow-renderer';
 import cx from 'classnames';
 
 import styles from './NodeTypes.module.css';
 import useNodeClickHandler from '../../hooks/useNodeClick';
+import useNodeRightClickHandler from "../../hooks/useNodeRightClick";
 
 interface BaseNodeProps extends NodeProps {
   className?: string;
@@ -13,6 +14,7 @@ interface BaseNodeProps extends NodeProps {
 const WorkflowNode = ({ id, type, data, className }: BaseNodeProps) => {
   const clicked = useRef(false);
   const handleNodeClick = useNodeClickHandler(id);
+  const handleNodeRightClick = useNodeRightClickHandler(id);
   const nodeClasses = cx(styles.node, className);
 
   const onClick = useCallback(() => {
@@ -20,8 +22,13 @@ const WorkflowNode = ({ id, type, data, className }: BaseNodeProps) => {
     handleNodeClick();
   }, [handleNodeClick]);
 
+  const onContextMenu = useCallback((e: any) => {
+    e.preventDefault();
+    handleNodeRightClick();
+  }, [handleNodeRightClick])
+
   return (
-    <div onClick={onClick} className={nodeClasses} title="click to add a child node">
+    <div onClick={onClick} onContextMenu={onContextMenu} className={nodeClasses} title="click to add a child node">
       {id === '1' && !clicked.current && (
         <div className={styles.swoopyWrapper}>
           <div className={styles.swoopy}>⤹</div>
