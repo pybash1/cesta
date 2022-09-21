@@ -20,6 +20,7 @@ import { Plus, PaperFail } from "react-iconly";
 import Navbar from "../components/Navbar_";
 import { Resource } from "../models";
 import Head from "next/head";
+import Footer from "../components/Footer";
 
 export default function Resources() {
   const [visible, setVisible] = useState(false);
@@ -247,6 +248,7 @@ export default function Resources() {
           </Card>
         </Grid>
       </Grid.Container>
+      <Footer />
     </>
   );
 }

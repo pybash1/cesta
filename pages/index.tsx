@@ -3,6 +3,7 @@ import Navbar from "../components/Navbar_";
 import { Container, Spacer, Button, Link } from "@nextui-org/react";
 import GradientText from "../components/GradientText";
 import Head from "next/head";
+import Footer from "../components/Footer";
 
 const Home: NextPage = () => {
   return (
@@ -16,6 +17,7 @@ const Home: NextPage = () => {
         <GradientText />
         <Button as={Link} color={"gradient"} ghost auto href="/roadmaps">Explore Roadmaps</Button>
       </Container>
+      <Footer />
     </div>
   );
 };

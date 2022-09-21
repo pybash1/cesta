@@ -22,6 +22,7 @@ import { Roadmap, RoadmapResource } from "../models";
 import Flow from "../components/Flow";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import Head from "next/head";
+import Footer from "../components/Footer";
 
 export default function Roadmaps() {
   const [loggedin, setLoggedin] = useState(false);
@@ -282,6 +283,7 @@ export default function Roadmaps() {
           </Card>
         </Grid>
       </Grid.Container>
+      <Footer />
     </>
   );
 }

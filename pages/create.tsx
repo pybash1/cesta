@@ -16,6 +16,7 @@ import { DataStore } from "@aws-amplify/datastore";
 import { Roadmap, RoadmapResource } from "../models";
 import toast from "react-hot-toast";
 import Head from "next/head";
+import Footer from "../components/Footer";
 
 export default function Create() {
   const [rfInstance, setRfInstance] = useState<any>(null);
@@ -190,6 +191,7 @@ export default function Create() {
         <Spacer y={2} />
         <Button onClick={onSubmit}>Create Roadmap</Button>
       </Container>
+      <Footer />
     </>
   );
 }

@@ -17,6 +17,7 @@ import { Auth } from "aws-amplify";
 import { useRouter } from "next/router";
 import toast from "react-hot-toast";
 import Head from "next/head";
+import Footer from "../components/Footer";
 
 export default function SignUp() {
   const [email, setEmail] = useState("");
@@ -198,6 +199,7 @@ export default function SignUp() {
           Sign Up
         </Button>
       </Container>
+      <Footer />
     </>
   );
 }
