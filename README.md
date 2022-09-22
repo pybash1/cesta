@@ -12,7 +12,9 @@ Cesta is an all in one platform, to find, share, discover, and learn new things 
 [![MIT License](https://img.shields.io/apm/l/atomic-design-ui.svg?)](https://github.com/tterb/atomic-design-ui/blob/master/LICENSEs)
 ## Demo
 
-Insert gif or link to demo
+<img src="./assets/rec.gif" />
+
+<img src="./assets/rec2.gif" />
 
 
 ## Features
