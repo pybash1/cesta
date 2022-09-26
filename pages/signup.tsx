@@ -159,6 +159,7 @@ export default function SignUp() {
           color="primary"
           size="lg"
           placeholder="Password"
+          helperText="Password must be atleast 8 characters, and contain atleast 1 number, special character, uppercase and lowercase letter."
           contentLeft={<Password set="bulk" />}
         />
         <Spacer />
