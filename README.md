@@ -9,7 +9,7 @@ Cesta is an all in one platform, to find, share, discover, and learn new things 
 
 > **Note**: This project was made for the [AWS Amplify](https://aws.amazon.com/amplify/) x [Hashnode](https://hashnode.com) hackathon.
 ## Badges
-[![MIT License](https://img.shields.io/apm/l/atomic-design-ui.svg?)](https://github.com/tterb/atomic-design-ui/blob/master/LICENSEs)
+[![MIT License](https://img.shields.io/github/license/pybash1/cesta.svg?)](https://github.com/pybash1/cesta/blob/master/LICENSE)
 ## Demo
 
 <img src="./assets/rec.gif" />
@@ -19,10 +19,10 @@ Cesta is an all in one platform, to find, share, discover, and learn new things 
 
 ## Features
 
-- 🚀Open Source
-- 🌐Easy to use
-- 🕶️Dark mode
-- 💻Cross platform
+- 🚀 Open Source
+- 🌐 Easy to use
+- 🕶️ Dark mode
+- 💻 Cross platform
 - Learn new things
 - Discover new resources
 
