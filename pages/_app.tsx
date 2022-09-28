@@ -214,10 +214,10 @@ function MyApp({ Component, pageProps }: AppProps) {
           <Input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Search for roadmaps, resources, ..." bordered color="primary" size="lg" />
           <Spacer />
           {resultsRoadmap.map((roadmap, idx) => roadmap.name.toLowerCase().includes(query.toLowerCase()) || roadmap.description.toLowerCase().includes(query.toLowerCase()) ? (
-            <Row><Button light auto as={Link} onClick={() => openRoadmap(idx)}><Text>{roadmap.name} - {roadmap.description.substr(0, 50)}</Text></Button><Badge enableShadow disableOutline color="primary">Roadmap</Badge></Row>
+            <Row><Button light auto as={Link} onClick={() => openRoadmap(idx)}><Text>{roadmap.name} - {roadmap.description.substr(0, 50)}</Text></Button><Badge disableOutline color="primary" variant="flat">Roadmap</Badge></Row>
           ) : null)}
           {resultsResource.map(resource => resource.name.toLowerCase().includes(query.toLowerCase()) || resource.description.toLowerCase().includes(query.toLowerCase()) ? (
-            <Row><Button light as={Link} href={resource.link} target="_blank"><Text>{resource.name} - {resource.description.substr(0, 50)}</Text></Button><Badge enableShadow disableOutline color="success">Resource</Badge></Row>
+            <Row><Button light as={Link} href={resource.link} target="_blank"><Text>{resource.name} - {resource.description.substr(0, 50)}</Text></Button><Badge disableOutline color="success" variant="flat">Resource</Badge></Row>
           ) : null)}
         </Modal.Body>
       </Modal>
