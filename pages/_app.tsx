@@ -12,6 +12,7 @@ import {
   Row,
   Container,
   Table,
+  Badge
 } from "@nextui-org/react";
 import { IconlyProvider } from "react-iconly";
 import { Toaster } from "react-hot-toast";
@@ -213,10 +214,10 @@ function MyApp({ Component, pageProps }: AppProps) {
           <Input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Search for roadmaps, resources, ..." bordered color="primary" size="lg" />
           <Spacer />
           {resultsRoadmap.map((roadmap, idx) => roadmap.name.toLowerCase().includes(query.toLowerCase()) || roadmap.description.toLowerCase().includes(query.toLowerCase()) ? (
-            <Button light auto as={Link} onClick={() => openRoadmap(idx)}><Text>{roadmap.name} - {roadmap.description.substr(0, 50)}</Text></Button>
+            <Row><Button light auto as={Link} onClick={() => openRoadmap(idx)}><Text>{roadmap.name} - {roadmap.description.substr(0, 50)}</Text></Button><Badge enableShadow disableOutline color="primary">Roadmap</Badge></Row>
           ) : null)}
           {resultsResource.map(resource => resource.name.toLowerCase().includes(query.toLowerCase()) || resource.description.toLowerCase().includes(query.toLowerCase()) ? (
-            <Button light as={Link} href={resource.link} target="_blank"><Text>{resource.name} - {resource.description.substr(0, 50)}</Text></Button>
+            <Row><Button light as={Link} href={resource.link} target="_blank"><Text>{resource.name} - {resource.description.substr(0, 50)}</Text></Button><Badge enableShadow disableOutline color="success">Resource</Badge></Row>
           ) : null)}
         </Modal.Body>
       </Modal>
