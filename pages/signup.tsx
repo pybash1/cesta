@@ -42,12 +42,15 @@ export default function SignUp() {
       return;
     }
     signUp(username, password, email, name)
-      .then((data) => console.log(data))
+      .then((data) => {console.log(data);setVisible(true);})
       .catch((e) => {
-        toast.error(e.toString());
+        if (e.toString().startsWith("InvalidPasswordException")) {
+          toast.error("Password must be atleast 8 characters long, and contain at least 1 number, special character, lowercase and uppercase character.")
+        } else {
+          toast.error(e.toString());
+        }
         return;
       });
-    setVisible(true);
     return;
   };
 
