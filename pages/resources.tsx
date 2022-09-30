@@ -31,6 +31,9 @@ export default function Resources() {
   const [free, setFree] = useState(false);
   const [oss, setOss] = useState(false);
   const [paid, setPaid] = useState(false);
+  const [course, setCourse] = useState(false);
+  const [devTool, setDevTool] = useState(false);
+  const [web3, setWeb3] = useState(false);
   const [loggedin, setLoggedin] = useState(false);
   const [user, setUser] = useState("");
   const router = useRouter();
@@ -55,6 +58,9 @@ export default function Resources() {
     if (free) tags.push("Free");
     if (oss) tags.push("Open Source");
     if (paid) tags.push("Paid");
+    if (course) tags.push("Course");
+    if (devTool) tags.push("Dev Tool");
+    if (web3) tags.push("Web3");
 
     Auth.currentAuthenticatedUser()
       .then((data) => {
@@ -147,15 +153,38 @@ export default function Resources() {
             placeholder="Link"
           />
           <Text size={16}>Tags</Text>
-          <Checkbox onChange={(e) => setOss(e)}>
-            <Text size={14}>Open Source</Text>
-          </Checkbox>
-          <Checkbox onChange={(e) => setFree(e)}>
-            <Text size={14}>Free</Text>
-          </Checkbox>
-          <Checkbox onChange={(e) => setPaid(e)}>
-            <Text size={14}>Paid</Text>
-          </Checkbox>
+          <Grid.Container gap={2}>
+            <Grid>
+              <Checkbox onChange={(e) => setOss(e)}>
+                <Text size={14}>Open Source</Text>
+              </Checkbox>
+            </Grid>
+            <Grid>
+              <Checkbox onChange={(e) => setFree(e)}>
+                <Text size={14}>Free</Text>
+              </Checkbox>
+            </Grid>
+            <Grid>
+              <Checkbox onChange={(e) => setPaid(e)}>
+                <Text size={14}>Paid</Text>
+              </Checkbox>
+            </Grid>
+            <Grid>
+              <Checkbox onChange={(e) => setCourse(e)}>
+                <Text size={14}>Course</Text>
+              </Checkbox>
+            </Grid>
+            <Grid>
+              <Checkbox onChange={(e) => setDevTool(e)}>
+                <Text size={14}>Dev Tool</Text>
+              </Checkbox>
+            </Grid>
+            <Grid>
+              <Checkbox onChange={(e) => setWeb3(e)}>
+                <Text size={14}>Web3</Text>
+              </Checkbox>
+            </Grid>
+          </Grid.Container>
           <Text size={14} color="warning">
             Troll, fake, or spam resources are subject to getting removed!
           </Text>
@@ -172,7 +201,7 @@ export default function Resources() {
           Find Resources on Everything
         </Text>
       </Container>
-      <Container display="flex" alignItems="center">
+      {/* <Container display="flex" alignItems="center">
         <Text h2 size={20}>
           Find by Category
         </Text>
@@ -181,8 +210,11 @@ export default function Resources() {
           <Button>Open Source</Button>
           <Button>Free</Button>
           <Button>Paid</Button>
+          <Button>Course</Button>
+          <Button>Dev Tool</Button>
+          <Button>Web3</Button>
         </Button.Group>
-      </Container>
+      </Container> */}
       <Spacer y={4} />
       <Grid.Container gap={4} css={{ paddingRight: "$20", paddingLeft: "$20" }}>
         {resources.map((resource, idx) => (
