@@ -1,11 +1,11 @@
 import { EdgeProps, useReactFlow } from 'react-flow-renderer';
 
-import { uuid, getLabel } from '../utils';
+import { uuid } from '../utils';
 
 function useEdgeClick(id: EdgeProps['id']) {
   const { setEdges, setNodes, getNode, getEdge } = useReactFlow();
 
-  const handleEdgeClick = () => {
+  const createNode = (label: string) => {
     const edge = getEdge(id);
     const targetNode = getNode(edge?.target as string);
     const insertNodeId = uuid();
@@ -13,7 +13,7 @@ function useEdgeClick(id: EdgeProps['id']) {
     const insertNode = {
       id: insertNodeId,
       position: { x: targetNode?.position.x, y: targetNode?.position.y },
-      data: { label: getLabel() },
+      data: { label: label },
       type: 'workflow',
     };
 
@@ -41,7 +41,7 @@ function useEdgeClick(id: EdgeProps['id']) {
     });
   };
 
-  return handleEdgeClick;
+  return createNode;
 }
 
 export default useEdgeClick;

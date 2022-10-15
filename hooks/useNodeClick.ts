@@ -1,11 +1,11 @@
 import { NodeProps, useReactFlow, getOutgoers, Edge, Node } from 'react-flow-renderer';
 
-import { uuid, getLabel } from '../utils';
+import { uuid } from '../utils';
 
 export function useNodeClick(id: NodeProps['id']) {
   const { setEdges, setNodes, getNodes, getEdges, getNode } = useReactFlow();
 
-  const onClick = () => {
+  const createNode = (label: string) => {
     const parentNode = getNode(id);
     const childNodeId = uuid();
     const childPlaceholderId = uuid();
@@ -14,7 +14,7 @@ export function useNodeClick(id: NodeProps['id']) {
       id: childNodeId,
       position: { x: parentNode?.position.x, y: parentNode?.position.y as number + 150 },
       type: 'workflow',
-      data: { label: getLabel() },
+      data: { label },
     };
 
     const childPlaceholderNode = {
@@ -51,7 +51,7 @@ export function useNodeClick(id: NodeProps['id']) {
     );
   };
 
-  return onClick;
+  return createNode;
 }
 
 export default useNodeClick;

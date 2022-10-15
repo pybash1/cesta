@@ -168,7 +168,7 @@ export default function Login() {
             Forgot Password
           </Text>
         </Modal.Header>
-        <Modal.Body>
+        <Modal.Body  >
           <Input
             value={emailch}
             onChange={(e) => setEmailch(e.target.value)}
@@ -213,7 +213,7 @@ export default function Login() {
         </Modal.Footer>
       </Modal>
       <Spacer y={4} />
-      <Container css={{ width: "50%" }}>
+      <Container css={{ width: "50%", maxWidth: "450px" }}>
         <Text size={18}>
           Welcome Back to{" "}
           <Text b size={18}>

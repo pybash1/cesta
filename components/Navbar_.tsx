@@ -3,25 +3,47 @@ import { useEffect, useState } from "react";
 import { Search } from "react-iconly";
 import { Auth } from "aws-amplify";
 import { useRouter } from "next/router";
+import NextLink from "next/link";
 
 interface Props {
   active: number;
 }
+
+const navLinks = [
+  {
+    label: "Home",
+    href: "/",
+  },
+  {
+    label: "Roadmaps",
+    href: "/roadmaps",
+  },
+  {
+    label: "Resources",
+    href: "/resources",
+  },
+  {
+    label: "Create",
+    href: "/create",
+  },
+];
 
 export default function Navbar_({ active }: Props) {
   const [loggedin, setLoggedin] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
-    Auth.currentAuthenticatedUser().then(data => setLoggedin(true)).catch(e => {
-      setLoggedin(false);
-    });
-  })
+    Auth.currentAuthenticatedUser()
+      .then((data) => setLoggedin(true))
+      .catch((e) => {
+        setLoggedin(false);
+      });
+  });
 
   const handleSignOut = () => {
-    Auth.signOut().then(data => console.log(data));
+    Auth.signOut().then((data) => console.log(data));
     router.push("/");
-  }
+  };
 
   return (
     <Navbar isCompact isBordered>
@@ -31,50 +53,29 @@ export default function Navbar_({ active }: Props) {
         </Text>
       </Navbar.Brand>
       <Navbar.Content enableCursorHighlight hideIn="xs" variant="highlight">
-        {active == 0 ? (
-          <Navbar.Link isActive href="/">
-            Home
-          </Navbar.Link>
-        ) : (
-          <Navbar.Link href="/">Home</Navbar.Link>
-        )}
-        {active == 1 ? (
-          <Navbar.Link isActive href="/roadmaps">
-            Roadmaps
-          </Navbar.Link>
-        ) : (
-          <Navbar.Link href="/roadmaps">Roadmaps</Navbar.Link>
-        )}
-        {active == 2 ? (
-          <Navbar.Link isActive href="/resources">
-            Resources
-          </Navbar.Link>
-        ) : (
-          <Navbar.Link href="/resources">Resources</Navbar.Link>
-        )}
-        {active == 3 && !loggedin ? (
-          <Navbar.Link isActive href="/create">
-            Create
-          </Navbar.Link>
-        ) : !loggedin ? (
-          <Navbar.Link href="/create">Create</Navbar.Link>
-        ) : null}
+        {navLinks.map((link, index) => (
+          <NextLink href={link.href} key={index} passHref>
+            <Navbar.Link isActive={index === active}>{link.label}</Navbar.Link>
+          </NextLink>
+        ))}
       </Navbar.Content>
       <Navbar.Content>
-        <Navbar.Item>
-          <Button auto flat as={Link} href={loggedin ? "/create" : "/signup"}>
+        <NextLink href={loggedin ? "/create" : "/signup"}>
+          <Button auto flat as={Link}>
             {loggedin ? "Create" : "Get Started"}
           </Button>
-        </Navbar.Item>
+        </NextLink>
         <Navbar.Item>
           {loggedin ? (
             <Button auto flat onClick={handleSignOut}>
               Sign Out
             </Button>
           ) : (
-            <Button auto flat as={Link} href="/login">
-              Sign In
-            </Button>
+            <NextLink href="/login" passHref>
+              <Button auto flat as={Link}>
+                Sign In
+              </Button>
+            </NextLink>
           )}
         </Navbar.Item>
       </Navbar.Content>

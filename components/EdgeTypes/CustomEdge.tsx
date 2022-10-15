@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { EdgeProps, getBezierPath, getEdgeCenter } from 'react-flow-renderer';
 
 import useEdgeClick from '../../hooks/useEdgeClick';
+import { InputModal } from '../InputModal';
 import styles from './EdgeTypes.module.css';
 
 export default function CustomEdge({
@@ -15,7 +16,14 @@ export default function CustomEdge({
   style = {},
   markerEnd,
 }: EdgeProps) {
-  const handleEdgeClick = useEdgeClick(id);
+  const [modalVisible, setModalVisible] = useState(false);
+  const createNode = useEdgeClick(id);
+
+  const handleEdgeClick = () => {
+    setModalVisible(true);
+  };
+
+  const handleSubmit = (value: string) => createNode(value);
 
   const edgePath = getBezierPath({
     sourceX,
@@ -54,6 +62,12 @@ export default function CustomEdge({
           +
         </text>
       </g>
+      <InputModal
+        visible={modalVisible}
+        handleClose={() => setModalVisible(false)}
+        onSubmit={handleSubmit}
+        label="Enter value"
+      />
     </>
   );
 }
