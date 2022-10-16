@@ -35,7 +35,7 @@ export default function Create() {
         setUser(data.attributes.email);
       })
       .catch((e) => {
-        router.push("/login");
+        // router.push("/login");
       });
   });
 
@@ -156,7 +156,7 @@ export default function Create() {
           </Table.Body>
         </Table>
         <Spacer />
-        <Container>
+        <Container css={{ margin: 0 }}>
           <Input
             value={resourceName}
             onChange={(e) => setResourceName(e.target.value)}

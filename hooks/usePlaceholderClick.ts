@@ -1,13 +1,13 @@
 import { Edge, Node, NodeProps, useReactFlow } from 'react-flow-renderer';
 
-import { uuid, getLabel } from '../utils';
+import { uuid } from '../utils';
 
 export function usePlaceholderClick(id: NodeProps['id']) {
   const { getNode, setNodes, setEdges } = useReactFlow();
 
-  const onClick = () => {
+  const createNode = (label: string) => {
     const parentNode = getNode(id);
-
+    console.log(id, parentNode)
     const childPlaceholderId = uuid();
 
     const childPlaceholderNode = {
@@ -31,7 +31,7 @@ export function usePlaceholderClick(id: NodeProps['id']) {
             return {
               ...node,
               type: 'workflow',
-              data: { label: getLabel() },
+              data: { label },
             };
           }
           return node;
@@ -54,7 +54,7 @@ export function usePlaceholderClick(id: NodeProps['id']) {
     );
   };
 
-  return onClick;
+  return createNode;
 }
 
 export default usePlaceholderClick;

@@ -133,7 +133,7 @@ export default function SignUp() {
         </Modal.Footer>
       </Modal>
       <Spacer y={4} />
-      <Container css={{ width: "50%" }}>
+      <Container css={{ width: "50%", maxWidth: "600px" }}>
         <Text size={18}>
           Welcome Back to{" "}
           <Text b size={18}>
@@ -164,6 +164,7 @@ export default function SignUp() {
           placeholder="Password"
           helperText="Password must be atleast 8 characters, and contain atleast 1 number, special character, uppercase and lowercase letter."
           contentLeft={<Password set="bulk" />}
+          css={{ marginBottom: "1rem" }}
         />
         <Spacer />
         <Input

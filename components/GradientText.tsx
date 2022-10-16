@@ -5,15 +5,18 @@ export default function GradientText() {
     <>
       <Text
         h1
-        size={60}
+        size={120}
+        
         weight="bold"
         css={{
             textGradient: "45deg, $blue600 0%, $pink600 75%",
             textAlign: "center",
+            lineHeight: "1.1",
+            marginBottom: "2.5rem",
         }}
       >
         Learn.
-        <br />
+        
         Share.
         <br />
         Repeat.
