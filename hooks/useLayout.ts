@@ -1,7 +1,7 @@
-import { useEffect, useRef } from 'react';
-import { stratify, tree } from 'd3-hierarchy';
-import { timer } from 'd3-timer';
-import { Edge, Node, useReactFlow, useStore } from 'react-flow-renderer';
+import { useEffect, useRef } from "react";
+import { stratify, tree } from "d3-hierarchy";
+import { timer } from "d3-timer";
+import { Edge, Node, useReactFlow, useStore } from "react-flow-renderer";
 
 const layout = tree()
   .nodeSize([200, 150])
@@ -10,14 +10,16 @@ const options = { duration: 300 };
 
 function layoutNodes(nodes: Node[], edges: Edge[]) {
   const hierarchy = stratify()
-    
     .id((d: any) => d.id)
-    
-    .parentId((d: any) => edges.find((e: Edge) => e.target === d.id)?.source)(nodes);
-    
-    const root = layout(hierarchy);
+    .parentId((d: any) => edges.find((e: Edge) => e.target === d.id)?.source)(
+    nodes
+  );
 
-  return root.descendants().map((d: any) => ({ ...d.data, position: { x: d.x, y: d.y } }));
+  const root = layout(hierarchy);
+
+  return root
+    .descendants()
+    .map((d: any) => ({ ...d.data, position: { x: d.x, y: d.y } }));
 }
 
 const nodesLengthSelector = (state: any) => state.nodeInternals.size;
@@ -25,7 +27,8 @@ const nodesLengthSelector = (state: any) => state.nodeInternals.size;
 function useLayout() {
   const initial = useRef(true);
   const nodesLength = useStore(nodesLengthSelector);
-  const { getNodes, getNode, setNodes, setEdges, getEdges, fitView } = useReactFlow();
+  const { getNodes, getNode, setNodes, setEdges, getEdges, fitView } =
+    useReactFlow();
 
   useEffect(() => {
     const nodes = getNodes();

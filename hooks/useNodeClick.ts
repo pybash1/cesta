@@ -5,8 +5,9 @@ import { uuid } from '../utils';
 export function useNodeClick(id: NodeProps['id']) {
   const { setEdges, setNodes, getNodes, getEdges, getNode } = useReactFlow();
 
-  const createNode = (label: string) => {
+  const createNode = (label: string): void => {
     const parentNode = getNode(id);
+    console.log(id, parentNode)
     const childNodeId = uuid();
     const childPlaceholderId = uuid();
 

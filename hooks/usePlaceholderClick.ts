@@ -7,7 +7,7 @@ export function usePlaceholderClick(id: NodeProps['id']) {
 
   const createNode = (label: string) => {
     const parentNode = getNode(id);
-
+    console.log(id, parentNode)
     const childPlaceholderId = uuid();
 
     const childPlaceholderNode = {

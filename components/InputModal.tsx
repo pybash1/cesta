@@ -60,10 +60,11 @@ export const InputModal: React.FC<InputModalProps> = ({
           size="lg"
           placeholder={label}
           onChange={onChange}
+          autoFocus
         />
       </Modal.Body>
       <Modal.Footer>
-        <Button autoFocus auto type="submit">
+        <Button auto type="submit">
           Submit
         </Button>
       </Modal.Footer>
